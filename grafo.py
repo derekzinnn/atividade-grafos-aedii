@@ -1,23 +1,29 @@
+# @unisenac unidade do peso das arestas (a mesma em todo o arestas.txt)
 UNIDADE = "metros"
 
 
+# @unisenac monta a lista de adjacência: { porta: [(vizinho, peso), ...] }. Nós não têm peso, só arestas
 def carregar_grafo(caminho):
     grafo = {}
     with open(caminho, encoding="utf-8") as arq:
         for linha in arq:
+            # @unisenac pula linhas em branco
             if not linha.strip():
                 continue
             a, b, peso = linha.split()
             peso = int(peso)
+            # @unisenac cada linha do arquivo gera duas entradas, porque se anda nos dois sentidos
             grafo.setdefault(a, []).append((b, peso))
             grafo.setdefault(b, []).append((a, peso))
     return grafo
 
 
+# @unisenac cada aresta aparece 2x na lista (ida e volta), por isso divide por 2
 def contar_arestas(grafo):
     return sum(len(vizinhos) for vizinhos in grafo.values()) // 2
 
 
+# @unisenac BFS simples a partir do LABTEC; devolve as portas que não foram alcançadas (se vier alguma, falta aresta)
 def conferir_grafo(grafo, origem="LABTEC"):
     alcancadas = {origem}
     fila = [origem]

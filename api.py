@@ -3,10 +3,12 @@ from fastapi import FastAPI, HTTPException
 from buscas import ALGORITMOS
 from grafo import UNIDADE, carregar_grafo
 
+# @unisenac rodar com: uvicorn api:app --reload (documentação em /docs)
 app = FastAPI(title="Rotas do Prédio")
 grafo = carregar_grafo("arestas.txt")
 
 
+# @unisenac porta inexistente devolve 404 com mensagem
 def validar_porta(porta):
     porta = porta.upper()
     if porta not in grafo:
@@ -14,6 +16,7 @@ def validar_porta(porta):
     return porta
 
 
+# @unisenac roda um algoritmo e monta a resposta no formato pedido no enunciado
 def executar(algoritmo, origem, destino):
     caminho, custo, visitados = ALGORITMOS[algoritmo](grafo, origem, destino)
     return {
@@ -25,17 +28,20 @@ def executar(algoritmo, origem, destino):
     }
 
 
+# @unisenac GET /portas: todas as portas
 @app.get("/portas")
 def portas():
     return sorted(grafo)
 
 
+# @unisenac GET /vizinhos/{porta}: vizinhos e peso de cada aresta
 @app.get("/vizinhos/{porta}")
 def vizinhos(porta: str):
     porta = validar_porta(porta)
     return [{"porta": p, "peso": w} for p, w in grafo[porta]]
 
 
+# @unisenac GET /rota: caminho, custo e visitados de um algoritmo
 @app.get("/rota")
 def rota(origem: str, destino: str, algoritmo: str = "dijkstra"):
     origem, destino = validar_porta(origem), validar_porta(destino)
@@ -45,6 +51,7 @@ def rota(origem: str, destino: str, algoritmo: str = "dijkstra"):
     return executar(algoritmo, origem, destino)
 
 
+# @unisenac GET /comparar: os quatro algoritmos lado a lado
 @app.get("/comparar")
 def comparar(origem: str, destino: str):
     origem, destino = validar_porta(origem), validar_porta(destino)
