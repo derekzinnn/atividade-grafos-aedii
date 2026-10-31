@@ -1,4 +1,4 @@
-from buscas import ALGORITMOS, bfs, dijkstra
+from buscas import ALGORITMOS, bfs, dijkstra, encontrar_par_divergente
 from grafo import carregar_grafo, conferir_grafo, contar_arestas
 
 g = carregar_grafo("arestas.txt")
@@ -16,6 +16,5 @@ for destino in g:
         assert caminho[0] == "LABTEC" and caminho[-1] == destino
         assert custo >= menor, nome
 
-print("BFS", bfs(g, "LABTEC", "PORTA24"))
-print("Dijkstra", dijkstra(g, "LABTEC", "PORTA24"))
+print("Par divergente:", encontrar_par_divergente(g))
 print("Tudo certo.")

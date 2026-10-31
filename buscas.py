@@ -106,3 +106,17 @@ def dijkstra(grafo, origem, destino):
 
 
 ALGORITMOS = {"bfs": bfs, "dfs": dfs, "gulosa": gulosa, "dijkstra": dijkstra}
+
+
+def encontrar_par_divergente(grafo):
+    melhor = None
+    portas = sorted(grafo)
+    for i, origem in enumerate(portas):
+        for destino in portas[i + 1:]:
+            caminho_bfs, custo_bfs, _ = bfs(grafo, origem, destino)
+            caminho_dij, custo_dij, _ = dijkstra(grafo, origem, destino)
+            if len(caminho_bfs) < len(caminho_dij) and custo_bfs > custo_dij:
+                diferenca = custo_bfs - custo_dij
+                if melhor is None or diferenca > melhor[0]:
+                    melhor = (diferenca, origem, destino, caminho_bfs, custo_bfs, caminho_dij, custo_dij)
+    return melhor
