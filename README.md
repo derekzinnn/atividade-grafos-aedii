@@ -51,15 +51,15 @@ portas e o Dijkstra acha menos metros, com a maior diferença.
 
 ## BFS e Dijkstra em caminhos diferentes
 
-ADMINISTRACAO até BANHEIROFEM:
+BANHEIROFEM até BIBLIOTECA1:
 
 | Algoritmo | Portas no caminho | Custo |
 |---|---|---|
-| BFS | 8: ADMINISTRACAO, BIBLIOTECA1, BIBLIOTECA2, IGREJA2, IGREJA1, CANTINA1, PORTA11, BANHEIROFEM | 103 m |
-| Dijkstra | 10: ADMINISTRACAO, SALAPROFESSORES, PORTA23, SECRETARIA2, COORDENADOR, SECRETARIA1, PORTA19, PORTA14, BANHEIROMASC, BANHEIROFEM | 67 m |
+| BFS | 7: BANHEIROFEM, PORTA11, CANTINA1, IGREJA1, IGREJA2, BIBLIOTECA2, BIBLIOTECA1 | 92 m |
+| Dijkstra | 8: BANHEIROFEM, BANHEIROMASC, PORTA14, PORTA19, COORDENADOR, PORTA23, SALAPROFESSORES, BIBLIOTECA1 | 58 m |
 
-A BFS conta portas: atravessando a biblioteca e o pátio são 7 arestas, contra 9 pelo corredor de cima, então ela
-escolhe o primeiro e ignora o peso. O Dijkstra soma as distâncias: o caminho da BFS tem arestas longas
-(BIBLIOTECA1 a BIBLIOTECA2 com 20 m, IGREJA2 a BIBLIOTECA2 com 18 m, CANTINA1 a IGREJA1 com 16 m) e dá 103 m,
-enquanto o corredor de cima tem mais portas, mas arestas de 5 a 10 m, e dá 67 m. Menos portas não significa
-menos metros, e só o Dijkstra garante o menor custo.
+A BFS conta portas: pelo pátio são 6 arestas, contra 7 pelo corredor de cima, então ela escolhe o primeiro e
+ignora o peso. O Dijkstra soma as distâncias: o caminho da BFS tem arestas longas (BIBLIOTECA2 a BIBLIOTECA1
+com 20 m, IGREJA2 a BIBLIOTECA2 com 18 m, CANTINA1 a IGREJA1 com 16 m) e dá 92 m, enquanto o corredor de cima
+tem uma porta a mais, mas arestas de 5 a 11 m, e dá 58 m. Menos portas não significa menos metros, e só o
+Dijkstra garante o menor custo.
