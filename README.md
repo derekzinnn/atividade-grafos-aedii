@@ -5,6 +5,7 @@ Trabalho de Algoritmos e Estruturas de Dados II, Unisenac Campus Pelotas (Prof. 
 ## Integrantes
 
 - Derek Cavalcanti
+- Julia Alsina
 
 ## Unidade do peso
 
