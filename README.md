@@ -39,8 +39,8 @@ Porta inexistente devolve 404 com mensagem.
 
 ## Grafo
 
-`grafo-planta.png` mostra as 49 portas marcadas sobre a planta e as ligações entre portas vizinhas.
-As portas sem nome na planta foram numeradas (`PORTA01` a `PORTA49`); `LABTEC` e `LAB201` mantêm o nome.
+`grafo-planta.png` mostra as 51 portas marcadas sobre a planta e as ligações entre portas vizinhas.
+As portas sem nome na planta foram numeradas (`PORTA01` a `PORTA51`); `LABTEC` e `LAB201` mantêm o nome.
 
 ## BFS e Dijkstra em caminhos diferentes
 
