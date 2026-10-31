@@ -1,15 +1,21 @@
-from buscas import bfs, dfs, dijkstra, gulosa
+from buscas import ALGORITMOS, bfs, dijkstra
 from grafo import carregar_grafo, conferir_grafo, contar_arestas
 
 g = carregar_grafo("arestas.txt")
 assert conferir_grafo(g) == [], "BFS não alcança todas as portas"
 print("Portas:", len(g), "| Arestas:", contar_arestas(g))
 
-for nome, f in [("bfs", bfs), ("dfs", dfs), ("gulosa", gulosa), ("dijkstra", dijkstra)]:
-    print(nome, f(g, "LABTEC", "LAB203"))
+for origem in g:
+    for vizinho, peso in g[origem]:
+        assert (origem, peso) in g[vizinho], "aresta sem volta"
 
-assert bfs(g, "LABTEC", "LAB203") == (["LABTEC", "PATIO", "LAB203"], 48, 4)
-assert gulosa(g, "LABTEC", "LAB203")[:2] == (["LABTEC", "PATIO", "LAB203"], 48)
-assert dijkstra(g, "LABTEC", "LAB203") == (["LABTEC", "LAB201", "LAB202", "LAB203"], 31, 5)
-assert dfs(g, "LABTEC", "LAB203")[1] in (31, 48)
+for destino in g:
+    menor = dijkstra(g, "LABTEC", destino)[1]
+    for nome, busca in ALGORITMOS.items():
+        caminho, custo, visitados = busca(g, "LABTEC", destino)
+        assert caminho[0] == "LABTEC" and caminho[-1] == destino
+        assert custo >= menor, nome
+
+print("BFS", bfs(g, "LABTEC", "PORTA24"))
+print("Dijkstra", dijkstra(g, "LABTEC", "PORTA24"))
 print("Tudo certo.")

@@ -1,4 +1,4 @@
-UNIDADE = "passos"
+UNIDADE = "metros"
 
 
 def carregar_grafo(caminho):
