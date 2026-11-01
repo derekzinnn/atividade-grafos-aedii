@@ -122,6 +122,7 @@ ALGORITMOS = {"bfs": bfs, "dfs": dfs, "gulosa": gulosa, "dijkstra": dijkstra}
 
 
 # @unisenac tarefa obrigatória: procura o par em que a BFS usa menos portas mas o Dijkstra gasta menos metros
+# @unisenac (entre os pares com diferença de pelo menos 15 m, fica com o de caminho mais curto, mais fácil de explicar)
 def encontrar_par_divergente(grafo):
     melhor = None
     portas = sorted(grafo)
@@ -131,6 +132,9 @@ def encontrar_par_divergente(grafo):
             caminho_dij, custo_dij, _ = dijkstra(grafo, origem, destino)
             if len(caminho_bfs) < len(caminho_dij) and custo_bfs > custo_dij:
                 diferenca = custo_bfs - custo_dij
-                if melhor is None or diferenca > melhor[0]:
-                    melhor = (diferenca, origem, destino, caminho_bfs, custo_bfs, caminho_dij, custo_dij)
+                if diferenca < 15:
+                    continue
+                chave = (len(caminho_dij), -diferenca)
+                if melhor is None or chave < melhor[0]:
+                    melhor = (chave, origem, destino, caminho_bfs, custo_bfs, caminho_dij, custo_dij)
     return melhor

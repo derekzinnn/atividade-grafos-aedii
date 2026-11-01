@@ -39,27 +39,29 @@ Porta inexistente devolve 404 com mensagem.
 
 ## Grafo
 
-`grafo-planta.png` mostra as 47 portas sobre a planta e as ligações entre portas vizinhas.
+`desenho-grafo.png` é o desenho do grupo: as portas numeradas e as ligações traçadas sobre a planta.
+`grafo-planta.png` é o mesmo grafo gerado a partir do `arestas.txt`, para conferência.
 Portas de sala têm o nome da sala (`LAB201`, `CANTINA1`, `IGREJA2`, ...); as de corredor ou de salas sem nome
-na planta mantêm o número da planta numerada pelo grupo (`PORTA11`, `PORTA14`, ...). A porta do LabTec é `LABTEC`.
+na planta mantêm o número da planta (`PORTA11`, `PORTA14`, ...). A porta do LabTec é `LABTEC`.
 
 Os pesos são estimados a partir da escala da planta (as medidas impressas nas paredes), em linha reta entre
-portas vizinhas. Não foram medidos andando.
+portas vizinhas. Não foram medidos andando. Uma aresta só existe se dá para andar entre as duas portas sem
+passar por outra porta.
 
-`encontrar_par_divergente` em `buscas.py` varre todos os pares de portas e devolve o par em que a BFS acha menos
-portas e o Dijkstra acha menos metros, com a maior diferença.
+`encontrar_par_divergente` em `buscas.py` varre todos os pares de portas e devolve um par em que a BFS usa menos
+portas e o Dijkstra gasta menos metros (diferença de pelo menos 15 m, com o caminho mais curto possível).
 
 ## BFS e Dijkstra em caminhos diferentes
 
-BANHEIROFEM até BIBLIOTECA1:
+CANTINA2 até SALAPROFESSORES:
 
 | Algoritmo | Portas no caminho | Custo |
 |---|---|---|
-| BFS | 7: BANHEIROFEM, PORTA11, CANTINA1, IGREJA1, IGREJA2, BIBLIOTECA2, BIBLIOTECA1 | 92 m |
-| Dijkstra | 8: BANHEIROFEM, BANHEIROMASC, PORTA14, PORTA19, COORDENADOR, PORTA23, SALAPROFESSORES, BIBLIOTECA1 | 58 m |
+| BFS | 9: CANTINA2, IGREJA1, IGREJA2, BIBLIOTECA2, PORTA29, PORTA28, PORTA27, BIBLIOTECA1, SALAPROFESSORES | 112 m |
+| Dijkstra | 10: CANTINA2, CANTINA1, PORTA11, BANHEIROFEM, BANHEIROMASC, PORTA14, PORTA19, COORDENADOR, PORTA23, SALAPROFESSORES | 91 m |
 
-A BFS conta portas: pelo pátio são 6 arestas, contra 7 pelo corredor de cima, então ela escolhe o primeiro e
-ignora o peso. O Dijkstra soma as distâncias: o caminho da BFS tem arestas longas (BIBLIOTECA2 a BIBLIOTECA1
-com 20 m, IGREJA2 a BIBLIOTECA2 com 18 m, CANTINA1 a IGREJA1 com 16 m) e dá 92 m, enquanto o corredor de cima
-tem uma porta a mais, mas arestas de 5 a 11 m, e dá 58 m. Menos portas não significa menos metros, e só o
-Dijkstra garante o menor custo.
+A BFS conta portas: atravessando a Igreja e a Biblioteca são 8 arestas, contra 9 pelo corredor da esquerda,
+então ela escolhe o primeiro e ignora o peso. O Dijkstra soma as distâncias: o caminho da BFS tem arestas longas
+(PORTA27 a BIBLIOTECA1 com 27 m, IGREJA2 a BIBLIOTECA2 com 18 m, CANTINA2 a IGREJA1 com 16 m) e dá 112 m, enquanto
+o corredor tem uma porta a mais, mas arestas de 5 a 16 m, e dá 91 m. Menos portas não significa menos metros, e só
+o Dijkstra garante o menor custo.
