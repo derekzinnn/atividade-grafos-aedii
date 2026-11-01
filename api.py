@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import RedirectResponse
 
 from buscas import ALGORITMOS
 from grafo import UNIDADE, carregar_grafo
@@ -26,6 +27,12 @@ def executar(algoritmo, origem, destino):
         "unidade": UNIDADE,
         "visitados": visitados,
     }
+
+
+# @unisenac a raiz não tem conteúdo: manda para a documentação interativa
+@app.get("/", include_in_schema=False)
+def raiz():
+    return RedirectResponse("/docs")
 
 
 # @unisenac GET /portas: todas as portas
