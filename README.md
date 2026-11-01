@@ -41,6 +41,7 @@ Porta inexistente devolve 404 com mensagem.
 
 `desenho-grafo.png` é o desenho do grupo: as portas numeradas e as ligações traçadas sobre a planta, com o LabTec marcado como ponto zero.
 `desenho-grafo-pesos.png` é o mesmo desenho com o peso (em metros) escrito sobre cada aresta.
+`desenho-grafo-limpo.png` é uma versão redesenhada da planta, só com paredes, portas numeradas, ligações e pesos (LabTec como ponto zero).
 `grafo-planta.png` é o mesmo grafo gerado a partir do `arestas.txt`, para conferência.
 Portas de sala têm o nome da sala (`LAB201`, `CANTINA1`, `IGREJA2`, ...); as de corredor ou de salas sem nome
 na planta mantêm o número da planta (`PORTA11`, `PORTA14`, ...). A porta do LabTec é `LABTEC`.
