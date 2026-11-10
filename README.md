@@ -52,7 +52,6 @@ passar por outra porta.
 portas e o Dijkstra gasta menos metros (diferença de pelo menos 15 m, com o caminho mais curto possível).
 
 ## BFS e Dijkstra em caminhos diferentes
-
 CANTINA2 até SALAPROFESSORES:
 
 | Algoritmo | Portas no caminho | Custo |
